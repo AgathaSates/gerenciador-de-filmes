@@ -1,16 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
+import { AsNavbar } from './components/navbar/as-navbar';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  template: `
-    <h1>Welcome to {{ title() }}!</h1>
-
-    <router-outlet />
-  `,
-  styles: [],
+  imports: [AsNavbar, RouterOutlet],
+  templateUrl: './app.html',
 })
-export class App {
-  protected readonly title = signal('gerenciador-de-filmes');
-}
+export class App {}

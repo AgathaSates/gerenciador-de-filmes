@@ -1,1 +1,99 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'bootstrap';
+@use 'bootstrap-icons';
+
+.app-theme {
+  background-color: #181818;
+}
+
+.gradient-title {
+  font-size: clamp(1.5rem, 2.2vw + 0.5rem, 0.25rem);
+  line-height: 1.1;
+
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.gradient-title,
+.gradient-title:hover,
+.gradient-title:focus {
+  display: inline-block;
+  background-image: linear-gradient(
+    to top,
+    #da6176,
+    #e35669,
+    #ea495a,
+    #f03c4a,
+    #f42e37,
+    #e9203d,
+    #dd1143,
+    #d10047,
+    #ab1457,
+    #80245b,
+    #562852,
+    #33253d
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+}
+
+.app-scrollbar {
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #f03c4a;
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #dddddd;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: #cfcfcf;
+    }
+  }
+}
+
+.content-card {
+  background-color: #1f2021;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  position: relative;
+  overflow: visible;
+  border-radius: 0.75rem;
+}
+
+.poster-card {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
+.card-title {
+  --lines: 2;
+  line-height: 1.25;
+  margin: 0.25rem 0 0;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--lines);
+  overflow: hidden;
+
+  min-height: calc(1em * 1.25 * var(--lines));
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .content-card:hover {
+    transform: translateY(-6px) scale(1.06);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
+    z-index: 10;
+  }
+}

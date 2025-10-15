@@ -1,0 +1,111 @@
+<div class="container py-4">
+  @let movie = movieDetails$ | async;
+
+  @if (!movie) {
+    <p class="text-muted">Carregando detalhes…</p>
+  } @else {
+    <h1 class="mb-3 text-center pt-2 pb-4">{{ movie.title }}</h1>
+
+    <div class="row g-4">
+      <div class="col-12 col-md-4">
+        @if (movie.poster_path) {
+          <img
+            [src]="movie.poster_path"
+            class="img-fluid rounded-4 shadow-sm"
+            [alt]="movie.title"
+            loading="lazy"
+          />
+        } @else {
+          <div class="border rounded-4 p-5 text-center text-muted">Sem poster</div>
+        }
+      </div>
+
+      <div class="col-12 col-md-8">
+        <ul class="list-unstyled mb-3 text-secondary small">
+          @if (movie.release_date) {
+            <li><strong>Lançamento:</strong> {{ movie.release_date }}</li>
+          }
+          @if (movie.runtime !== null) {
+            <li><strong>Duração:</strong> {{ movie.runtime }} min</li>
+          }
+          @if (movie.genres?.length) {
+            <li>
+              <strong>Gêneros:</strong>
+              @for (g of movie.genres; track g.id; let last = $last) {
+                {{ g.name }}
+                @if (!last) {
+                  ,
+                }
+              }
+            </li>
+          }
+          <li><strong>Idioma original:</strong> {{ movie.original_language }}</li>
+          <li>
+            <strong>Nota média:</strong> {{ movie.vote_average }}
+            <span class="text-muted">({{ movie.vote_count }} votos)</span>
+          </li>
+        </ul>
+
+        @if (movie.overview) {
+          <h5>Sinopse</h5>
+          <p class="mb-0">{{ movie.overview }}</p>
+        }
+      </div>
+    </div>
+
+    @let cast = movie.credits?.cast ?? [];
+    @if (cast.length) {
+      <h2 class="mt-5 text-center pt-2 pb-4">Elenco principal</h2>
+      <div class="row g-3">
+        @for (c of cast; track c.id; let i = $index) {
+          @if (i < 12) {
+            <div class="col-6 col-md-3 col-lg-2">
+              <div class="text-center">
+                @if (c.profile_path) {
+                  <img
+                    [src]="c.profile_path"
+                    class="img-fluid rounded-3 mb-2"
+                    [alt]="c.name"
+                    loading="lazy"
+                  />
+                } @else {
+                  <div class="border rounded-3 py-5 mb-2 text-muted">Sem foto</div>
+                }
+                <div class="fw-semibold small">{{ c.name }}</div>
+                <div class="text-muted small">{{ c.character }}</div>
+              </div>
+            </div>
+          }
+        }
+      </div>
+    }
+
+    @let crew = movie.credits?.crew ?? [];
+    @if (crew.length) {
+      <h2 class="mt-4 text-center pt-2 pb-4">Equipe técnica</h2>
+      <div class="row g-2">
+        @for (m of crew; track m.id; let i = $index) {
+          @if (i < 12) {
+            <div class="col-12 col-md-6">
+              <strong>{{ m.job }}:</strong> {{ m.name }}
+            </div>
+          }
+        }
+      </div>
+    }
+
+    @let trailerUrl = getSafeTrailerUrl(movie);
+    @if (trailerUrl) {
+      <h2 class="mt-4 text-center pt-2 pb-2">Trailer</h2>
+      <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm">
+        <iframe
+          [src]="trailerUrl"
+          title="Trailer"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+    }
+  }
+</div>

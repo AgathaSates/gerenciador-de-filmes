@@ -3,6 +3,35 @@
 
 .app-theme {
   background-color: #181818;
+  color: #c7d2c7 !important;
+  small {
+    color: #c7d2c7 !important;
+  }
+}
+
+.navbar-color {
+  background-color: #1f2021 !important;
+  .nav-link {
+    color: #c7d2c7 !important;
+  }
+  .dropdown-menu {
+    background-color: #1f2021 !important;
+    border-color: #424242 !important;
+    .dropdown-item {
+      color: #c7d2c7 !important;
+      &:hover {
+        background-color: #343434 !important;
+      }
+    }
+  }
+  input {
+    background-color: #141414 !important;
+    border-color: #424242 !important;
+    color: #c7d2c7 !important;
+    &::placeholder {
+      color: #c7d2c7 !important;
+    }
+  }
 }
 
 .gradient-title {
@@ -50,17 +79,18 @@
   }
 
   &::-webkit-scrollbar-track {
-    background-color: #dddddd;
+    background-color: #343434;
     border-radius: 5px;
 
     &:hover {
-      background-color: #cfcfcf;
+      background-color: #444444;
     }
   }
 }
 
 .content-card {
   background-color: #1f2021;
+  color: #c7d2c7 !important;
   display: flex;
   flex-direction: column;
   height: 100%;

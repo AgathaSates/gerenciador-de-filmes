@@ -52,7 +52,8 @@
               }
             ],
             "styles": ["src/styles.scss"],
-            "scripts": ["bootstrap/dist/js/bootstrap.bundle.min.js"]
+            "scripts": ["bootstrap/dist/js/bootstrap.bundle.min.js"],
+            "outputPath": "dist/gerenciador-de-filmes"
           },
           "configurations": {
             "production": {
@@ -95,6 +96,15 @@
             }
           },
           "defaultConfiguration": "development"
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "https://AgathaSates.github.io/gerenciador-de-filmes/",
+            "repo": "https://github.com/AgathaSates/gerenciador-de-filmes",
+            "name": "Agatha Sates",
+            "email": "satesagatha@gmail.com"
+          }
         },
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"

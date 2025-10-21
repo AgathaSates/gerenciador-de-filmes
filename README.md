@@ -4,11 +4,19 @@
 
 ## 🏠 Página Inicial
 
-![Demonstração do Projeto]()
+![Demonstração do Projeto](./public/home-page.gif)
 
 ## 🏷️ Listagem por tipo
 
-![Demonstração do Projeto]()
+![Demonstração do Projeto](./public/listing.gif)
+
+## 🎞️ Detalhes de um filme
+
+![Demonstração do Projeto](./public/details.gif)
+
+## 🔎 Buscar filmes
+
+![Demonstração do Projeto](./public/search.gif)
 
 # 💡 Índice
 
@@ -84,6 +92,7 @@ Gerenciador-de-Filmes
 ├── package.json
 └── README.md
 ```
+
 - 🧩 **Components**: UI e fluxo. `list-page` reage a `:category` e `?q=`; `card-movie` renderiza cada item; `movie-details` mostra o detalhe por `:id`.
 
 - 🧠 **Models**: Tipagens fortes para respostas do TMDb (evita “código alfabeto”).
@@ -96,7 +105,6 @@ Gerenciador-de-Filmes
 
 - 🎨 **styles.scss**: Estilização global (Bootstrap, utilitários, overrides, etc.).
 
-
 # 🔧 Tecnologias Usadas
 
 - ⚡ **Angular** — componentes standalone + **Angular Router**
@@ -108,7 +116,6 @@ Gerenciador-de-Filmes
 - ✅ **ESLint** — padronização de código (`eslint.config.mts`)
 - 🔑 **Environments** — configuração de **API Key** por ambiente
 
-
 # 🧠 Commits e Convenções
 
 É utilizado [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/) para padronizar as mensagens de commit.
@@ -119,7 +126,7 @@ Gerenciador-de-Filmes
   <a href="https://github.com/AgathaSates">
     <img src="https://github.com/AgathaSates.png" width="100" style="border-radius: 50%;" alt="Tiago Santini"/>
     &nbsp;&nbsp;&nbsp;
-      </a>
+  </a>
 </p>
 
 | Nome         | GitHub                                         |

@@ -1,10 +1,10 @@
-# GerenciadorDeFilmes
+# Gerenciador De Filmes
 
 # 📌 Demonstração
 
 ## 🏠 Página Inicial
 
-![Demonstração do Projeto](https://imgur.com/znDGBj2)
+![Demonstração do Projeto]()
 
 ## 🏷️ Listagem por tipo
 
@@ -21,8 +21,6 @@
 - [Contribuidores](#-contribuidores)
 - [Mentores](#-mentores)
 - [Sobre o Projeto](#-sobre-o-projeto)
-- [Feedback](#-feedback)
-- [Como Contribuir](#-como-contribuir)
 
 # 🎬 Introdução
 
@@ -55,11 +53,11 @@ Gerenciador-de-Filmes
 ├── src
 │   ├── app
 │   │   ├── components
-│   │   │   ├── navbar/                 # Barra superior + busca (navega para /list-page/search?q=)
-│   │   │   ├── home-page/              # Página inicial (pode exibir destaques)
-│   │   │   ├── highlights-home-page/   # Seção de destaques/curadorias da home
+│   │   │   ├── navbar/                 # Barra superior + busca
+│   │   │   ├── home-page/              # Página inicial (exibe destaques)
+│   │   │   ├── highlights-home-page/   # Seção de destaques da home
 │   │   │   ├── list-page/              # Listagem paginada por categoria/busca
-│   │   │   ├── movie-details/          # Detalhe de filme (rota: /movie-details/:id)
+│   │   │   ├── movie-details/          # Detalhe de filme
 │   │   │   └── card-movie/             # Cartão de filme (poster, título, meta)
 │   │   │
 │   │   ├── models
@@ -85,8 +83,7 @@ Gerenciador-de-Filmes
 ├── eslint.config.mts
 ├── package.json
 └── README.md
-
-
+```
 - 🧩 **Components**: UI e fluxo. `list-page` reage a `:category` e `?q=`; `card-movie` renderiza cada item; `movie-details` mostra o detalhe por `:id`.
 
 - 🧠 **Models**: Tipagens fortes para respostas do TMDb (evita “código alfabeto”).
@@ -100,7 +97,7 @@ Gerenciador-de-Filmes
 - 🎨 **styles.scss**: Estilização global (Bootstrap, utilitários, overrides, etc.).
 
 
-## 🔧 Tecnologias Usadas
+# 🔧 Tecnologias Usadas
 
 - ⚡ **Angular** — componentes standalone + **Angular Router**
 - 🟦 **TypeScript** — tipagem forte em models e serviços
@@ -114,7 +111,7 @@ Gerenciador-de-Filmes
 
 # 🧠 Commits e Convenções
 
-Utilizamos [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/) para padronizar as mensagens de commit.
+É utilizado [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/) para padronizar as mensagens de commit.
 
 # 👥 Contribuidores
 
@@ -122,7 +119,7 @@ Utilizamos [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0
   <a href="https://github.com/AgathaSates">
     <img src="https://github.com/AgathaSates.png" width="100" style="border-radius: 50%;" alt="Tiago Santini"/>
     &nbsp;&nbsp;&nbsp;
-
+      </a>
 </p>
 
 | Nome         | GitHub                                         |
@@ -149,4 +146,3 @@ Utilizamos [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0
 # 🏫 Sobre o Projeto
 
 Desenvolvido durante o curso Fullstack da [Academia do Programador](https://academiadoprogramador.net) 2025
-```

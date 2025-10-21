@@ -1,5 +1,7 @@
 # Gerenciador De Filmes
 
+> 🔗 **Site (GitHub Pages):** https://agathasates.github.io/gerenciador-de-filmes/home-page
+
 # 📌 Demonstração
 
 ## 🏠 Página Inicial

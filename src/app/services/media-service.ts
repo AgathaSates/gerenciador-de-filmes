@@ -24,10 +24,10 @@ export class MediaService {
   }
 
   public selectTopRatedMovieMedia(pageNumber: number = 1) {
-    const popularUrl = `${this.baseUrl}/movie/top_rated?language=pt-BR&page=${pageNumber}`;
+    const topRatedMovieUrl = `${this.baseUrl}/movie/top_rated?language=pt-BR&page=${pageNumber}`;
 
     return this.http
-      .get<MediaApiResponse>(popularUrl, {
+      .get<MediaApiResponse>(topRatedMovieUrl, {
         headers: {
           Authorization: environment.apiKey,
         },
@@ -36,10 +36,22 @@ export class MediaService {
   }
 
   public selectNowPlayingMovieMedia(pageNumber: number = 1) {
-    const popularUrl = `${this.baseUrl}/movie/now_playing?language=pt-BR&page=${pageNumber}`;
+    const nowPlayingUrl = `${this.baseUrl}/movie/now_playing?language=pt-BR&page=${pageNumber}`;
 
     return this.http
-      .get<MediaApiResponse>(popularUrl, {
+      .get<MediaApiResponse>(nowPlayingUrl, {
+        headers: {
+          Authorization: environment.apiKey,
+        },
+      })
+      .pipe(map(this.mapListImages));
+  }
+
+  public searchMovieMedia(query: string, pageNumber: number = 1) {
+    const searchUrl = `https://api.themoviedb.org/3/search/movie?query=${query}&language=pt-BR&page=${pageNumber}`;
+
+    return this.http
+      .get<MediaApiResponse>(searchUrl, {
         headers: {
           Authorization: environment.apiKey,
         },

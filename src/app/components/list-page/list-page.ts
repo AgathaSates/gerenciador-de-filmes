@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Media, MediaApiResponse, MediaCategory } from '../../models/media-api-response';
 import {
+  combineLatest,
+  distinctUntilChanged,
   exhaustMap,
   filter,
   map,
@@ -20,33 +22,44 @@ import { CardMovie } from '../card-movie/card-movie';
   selector: 'list-page',
   imports: [AsyncPipe, CardMovie],
   template: `<div class="px-5 py-4">
+    @let search = searchTerm$ | async;
     <div class="text-center">
-      <h2 class="fs-1 gradient-title">{{ sectionTitle | async }}</h2>
+      <h2 class="fs-1 gradient-title">{{ sectionTitle | async }} {{ search }}</h2>
     </div>
 
+    @let media = contentList | async;
+
     <div class="row g-3 mt-1 px-1">
-      @for (media of (contentList | async)?.results; track media.id) {
-        <div class="col-lg-3 col-xl-2 pb-3">
-          <card-movie [media]="media"></card-movie>
+      @if (media?.total_results === 0) {
+        <div class="col-12">
+          <p class="text-center fs-4">Nenhum resultado encontrado para "{{ search }}".</p>
         </div>
+      } @else {
+        @for (m of media?.results; track m.id) {
+          <div class="col-lg-3 col-xl-2 pb-3">
+            <card-movie [media]="m"></card-movie>
+          </div>
+        }
       }
     </div>
 
-    <div class="d-flex justify-content-center my-4">
-      <button class="btn btn-secondary" (click)="loadMore()" [disabled]="endPage">
-        <i class="bi bi-arrow-clockwise my-auto me-1"></i>
-        Carregar mais
-      </button>
-    </div>
+    @if (!endPage) {
+      <div class="d-flex justify-content-center my-4">
+        <button class="btn btn-secondary" (click)="loadMore()">
+          <i class="bi bi-arrow-clockwise my-auto me-1"></i> Carregar mais
+        </button>
+      </div>
+    }
   </div>`,
 })
 export class ListPage {
   private readonly activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   protected readonly mediaService = inject(MediaService);
 
-  protected readonly popularMovieMedia$ = this.mediaService.selectPopularMovieMedia();
-  protected readonly topRatedMovieMedia$ = this.mediaService.selectTopRatedMovieMedia();
-  protected readonly nowPlayingMovieMedia$ = this.mediaService.selectNowPlayingMovieMedia();
+  public readonly searchTerm$ = this.activatedRoute.queryParamMap.pipe(
+    map((q) => (q.get('q') ?? '').trim()),
+    distinctUntilChanged(),
+  );
 
   private loadMoreClick$ = new Subject<void>();
   private currentPage: number = 1;
@@ -65,6 +78,9 @@ export class ListPage {
         case MediaCategory.NowPlaying: {
           return 'Filmes Em cartaz';
         }
+        case MediaCategory.Search: {
+          return 'Resultados da busca por: ';
+        }
         default: {
           return 'Filmes Populares';
         }
@@ -72,22 +88,25 @@ export class ListPage {
     }),
   );
 
-  public contentList: Observable<MediaApiResponse> = this.activatedRoute.paramMap.pipe(
-    switchMap((params) => {
-      const categoryParam: string | null = params.get('category');
-      switch (categoryParam as MediaCategory) {
-        case MediaCategory.Popular: {
+  public contentList = combineLatest([
+    this.activatedRoute.paramMap,
+    this.activatedRoute.queryParamMap,
+  ]).pipe(
+    switchMap(([params, qp]) => {
+      const categoria = params.get('category') as MediaCategory | null;
+      const search: string = (qp.get('q') ?? '').trim();
+
+      switch (categoria) {
+        case MediaCategory.Popular:
           return this.makePager((page) => this.mediaService.selectPopularMovieMedia(page));
-        }
-        case MediaCategory.TopRated: {
+        case MediaCategory.TopRated:
           return this.makePager((page) => this.mediaService.selectTopRatedMovieMedia(page));
-        }
-        case MediaCategory.NowPlaying: {
+        case MediaCategory.NowPlaying:
           return this.makePager((page) => this.mediaService.selectNowPlayingMovieMedia(page));
-        }
-        default: {
+        case MediaCategory.Search:
+          return this.makePager((page) => this.mediaService.searchMovieMedia(search, page));
+        default:
           return this.makePager((page) => this.mediaService.selectPopularMovieMedia(page));
-        }
       }
     }),
   );

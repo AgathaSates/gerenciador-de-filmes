@@ -43,6 +43,27 @@
           </ul>
         </li>
       </ul>
+      <form
+        class="d-flex align-items-center gap-2 ms-lg-auto my-2 my-lg-0"
+        role="search"
+        (ngSubmit)="onSearch()"
+        #searchForm="ngForm"
+      >
+        <div class="input-group">
+          <input
+            class="form-control fst-italic"
+            type="search"
+            name="busca"
+            placeholder="Buscar por um filme"
+            aria-label="Buscar"
+            aria-describedby="search-icon"
+            autocomplete="off"
+            spellcheck="false"
+            [(ngModel)]="inputSearch"
+          />
+          <button (click)="onSearch()" class="col btn btn-dark">Pesquisar</button>
+        </div>
+      </form>
     </div>
   </div>
 </nav>
